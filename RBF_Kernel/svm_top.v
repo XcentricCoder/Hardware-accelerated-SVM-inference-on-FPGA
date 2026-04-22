@@ -43,12 +43,14 @@ module svm_top #(
     
     // Results
     output wire [1:0]        predicted_class,
-    output wire              ready           // High when classification is done
+    output wire              ready,          // High when classification is done
+    output wire              k_valid_out     // Kernel valid pulse (for AXI wrapper FSM)
 );
 
     // Internal Signals
     wire signed [15:0] k_out;
     wire               k_valid;
+    assign k_valid_out = k_valid;   // Expose kernel valid to wrapper
     wire signed [31:0] score_01, score_02, score_12;
     wire               done_01, done_02, done_12;
     
